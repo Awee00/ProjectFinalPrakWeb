@@ -18,7 +18,7 @@ $a = mysqli_fetch_object($kontak);
     <!-- header -->
     <header>
         <div class="container">
-            <h1><a href="index.php">TOKO GADGET</a></h1>
+            <h1><a href="index.php">TOKO ARSIWA</a></h1>
             <ul>
                 <li><a href="produk.php">Produk</a></li>
             </ul>

@@ -24,7 +24,7 @@ if ($_SESSION['status_login'] != true) {
     <!-- header -->
     <header>
         <div class="container">
-            <h1><a href="dashboard.php">TOKO GADGET</a></h1>
+            <h1><a href="dashboard.php">TOKO ARSIWA</a></h1>
             <ul>
                 <li><a href="dashboard.php">Dashboard</a></li>
                 <li><a href="profil.php">Profil</a></li>
@@ -40,7 +40,7 @@ if ($_SESSION['status_login'] != true) {
         <div class="container">
             <h3>Dashboard</h3>
             <div class="box">
-                <h4>Hello!!, <?php echo $_SESSION['a_global']->admin_name ?></h4>
+                <h4>Hello!!, <?php echo $_SESSION['a_global']->name ?></h4>
             </div>
         </div>
     </div>

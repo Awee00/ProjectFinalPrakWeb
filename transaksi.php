@@ -44,16 +44,6 @@ $p = mysqli_fetch_object($produk);
             <h3>Edit Data Produk</h3>
             <div class="box">
                 <form action="" method="POST" enctype="multipart/form-data">
-                    <select class="input-control" name="data-produk" required>
-                        <option value="">-- Pilih Kategori --</option>
-                        <?php
-                        $kategori = mysqli_query($conn, "SELECT * FROM tbl_category ORDER BY category_id DESC");
-                        while ($r = mysqli_fetch_array($kategori)) {
-                        ?>
-                            <option value="<?php echo $r['category_id'] ?>" <?php echo ($r['category_id'] == $p->category_id) ?
-                                                                                'selected' : ''; ?>><?php echo $r['category_name'] ?></option>
-                        <?php } ?>
-                    </select>
 
                     <input type="text" name="nama" class="input-control" placeholder="Nama Produk" value="<?php echo $p->product_name ?>" required>
                     <input type="text" name="harga" class="input-control" placeholder="Harga" value="<?php echo $p->product_price ?>" required>
@@ -62,11 +52,7 @@ $p = mysqli_fetch_object($produk);
                     <input type="hidden" name="foto" value="<?php echo $p->product_image ?>">
                     <input type="file" name="gambar" class="input-control">
                     <textarea class="input-control" name="deskripsi" placeholder="Deskripsi"><?php echo $p->product_description ?></textarea><br>
-                    <select class="input-control" name="status">
-                        <option value="">-- Pilih Status --</option>
-                        <option value="1" <?php echo ($p->product_status == 1) ? 'selected' : ''; ?>>Aktif</option>
-                        <option value="0" <?php echo ($p->product_status == 0) ? 'selected' : ''; ?>>Tidak Aktif</option>
-                    </select>
+
                     <input type="submit" name="submit" value="Ubah Produk" class="btn">
                 </form>
                 <?php

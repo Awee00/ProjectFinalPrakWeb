@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 include 'koneksi.php';
-$kontak = mysqli_query($conn, "SELECT admin_telp, admin_email, admin_address FROM tbl_admin WHERE admin_id = 1");
+$kontak = mysqli_query($conn, "SELECT phone, email, address FROM tb_account WHERE role_id = 1");
 $a = mysqli_fetch_object($kontak);
 
 $produk = mysqli_query($conn, "SELECT * FROM tb_product WHERE product_id = '" . $_GET['id'] . "' ");
@@ -22,7 +22,7 @@ $p = mysqli_fetch_object($produk);
     <!-- header -->
     <header>
         <div class="container">
-            <h1><a href="index.php">TOKO GADGET</a></h1>
+            <h1><a href="index.php">TOKO ARSIWA</a></h1>
             <ul>
                 <li><a href="produk.php">Produk</a></li>
             </ul>
@@ -54,6 +54,7 @@ $p = mysqli_fetch_object($produk);
                     <p>Deskripsi : <br>
                         <?php echo $p->product_description ?>
                     </p>
+                    <a href="transaksi.php?id=<?php echo $p['product_id'] ?>">Beli</a>
                     <p><a href="https://api.whatsapp.com/send?phone=<?php echo $a->admin_telp ?>&text= Hai, Saya tertarik dengan produk tersebut." target="_blank">Hubungi via whatsapps
                             <img src="https://img.icons8.com/color/150/000000/whatsapp--v1.png" / width="50px"></a>
                     </p>
