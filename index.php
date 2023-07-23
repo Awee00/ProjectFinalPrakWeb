@@ -12,6 +12,9 @@ $a = mysqli_fetch_object($kontak);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>TOKO ARSIWA</title>
     <link rel="stylesheet" type="text/css" href="css/style2.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -60,29 +63,50 @@ $a = mysqli_fetch_object($kontak);
     </div>
 
     <!-- new product -->
-    <div class="section">
-        <div class="container">
-            <h3>Produk Terbaru</h3>
-            <div class="box">
-                <?php
-                $produk = mysqli_query($conn, "SELECT * FROM tb_product WHERE product_status = 1 ORDER BY product_id DESC LIMIT 8");
-                if (mysqli_num_rows($produk) > 0) {
-                    while ($p = mysqli_fetch_array($produk)) {
-                ?>
-                        <a href="detail-produk.php?id=<?php echo $p['product_id'] ?>">
+    <!-- <div class="section"> -->
+    <div class="container">
+        <h3>Produk Terbaru</h3>
+        <div class="row">
+            <?php
+            $produk = mysqli_query($conn, "SELECT * FROM tb_product WHERE product_status = 1 ORDER BY product_id DESC LIMIT 8");
+            if (mysqli_num_rows($produk) > 0) {
+                while ($p = mysqli_fetch_array($produk)) {
+            ?>
+                    <!-- <a href="detail-produk.php?id=<?php echo $p['product_id'] ?>">
                             <div class="col-4">
                                 <img src="produk/<?php echo $p['product_image'] ?>">
                                 <p class="nama"><?php echo substr($p['product_name'], 0, 30) ?></p>
                                 <p class="harga">Rp. <?php echo $p['product_price'] ?></p>
                             </div>
-                        </a>
-                    <?php }
-                } else { ?>
-                    <p>Produk tidak ada</p>
-                <?php } ?>
-            </div>
+                        </a> -->
+
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+
+                            <img class="card-img-top" src="produk/<?php echo $p['product_image'] ?>" alt="Card image cap">
+                            <div class="card-body">
+                                <!-- <a href="detail-produk.php?id=<?php echo $p['product_id'] ?>"> -->
+                                <h5 class="card-title"><?php echo substr($p['product_name'], 0, 30) ?></h5>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a href="transaksi.php?id=<?php echo $p['product_id'] ?>">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Beli</button>
+                                        </a>
+                                    </div>
+                                    <small class="text-muted">Rp. <?php echo $p['product_price'] ?></small>
+                                </div>
+                                <!-- </a> -->
+                            </div>
+                        </div>
+                    </div>
+
+                <?php }
+            } else { ?>
+                <p>Produk tidak ada</p>
+            <?php } ?>
         </div>
     </div>
+    <!-- </div> -->
 
     <!-- footer -->
     <div class="footer">

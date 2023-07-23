@@ -6,6 +6,7 @@ $a = mysqli_fetch_object($kontak);
 
 $produk = mysqli_query($conn, "SELECT * FROM tb_product WHERE product_id = '" . $_GET['id'] . "' ");
 $p = mysqli_fetch_object($produk);
+$pr = mysqli_fetch_array($produk);
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +55,7 @@ $p = mysqli_fetch_object($produk);
                     <p>Deskripsi : <br>
                         <?php echo $p->product_description ?>
                     </p>
-                    <a href="transaksi.php?id=<?php echo $p['product_id'] ?>">Beli</a>
+                    <a href="transaksi.php?id=<?php echo $product['product_id'] ?>">Beli</a>
                     <p><a href="https://api.whatsapp.com/send?phone=<?php echo $a->admin_telp ?>&text= Hai, Saya tertarik dengan produk tersebut." target="_blank">Hubungi via whatsapps
                             <img src="https://img.icons8.com/color/150/000000/whatsapp--v1.png" / width="50px"></a>
                     </p>
@@ -67,13 +68,13 @@ $p = mysqli_fetch_object($produk);
     <div class="footer">
         <div class="container">
             <h4>Alamat</h4>
-            <p><?php echo $a->admin_address ?></p>
+            <p><?php echo $a->address ?></p>
 
             <h4>Email</h4>
-            <p><?php echo $a->admin_email ?></p>
+            <p><?php echo $a->email ?></p>
 
             <h4>No.Hp</h4>
-            <p><?php echo $a->admin_telp ?></p>
+            <p><?php echo $a->phone ?></p>
             <small>Copyright &copy; 2023 - Toko Arsiwa</small>
         </div>
     </div>

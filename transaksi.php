@@ -7,9 +7,6 @@ if ($_SESSION['status_login'] != true) {
 }
 
 $produk = mysqli_query($conn, "SELECT * FROM tb_product WHERE product_id = '" . $_GET['id'] . "' ");
-if (mysqli_num_rows($produk)  == 0) {
-    echo '<script>window.location="data-produk.php"</script>';
-}
 $p = mysqli_fetch_object($produk);
 ?>
 <!DOCTYPE html>
@@ -41,28 +38,29 @@ $p = mysqli_fetch_object($produk);
     <!-- content -->
     <div class="section">
         <div class="container">
-            <h3>Edit Data Produk</h3>
+            <h3>Transaksi</h3>
             <div class="box">
                 <form action="" method="POST" enctype="multipart/form-data">
 
-                    <input type="text" name="nama" class="input-control" placeholder="Nama Produk" value="<?php echo $p->product_name ?>" required>
-                    <input type="text" name="harga" class="input-control" placeholder="Harga" value="<?php echo $p->product_price ?>" required>
+                    <label for="nama">Nama Produk</label>
+                    <input type="text" name="nama" class="input-control" placeholder="Nama Produk" value="<?php echo $p->product_name ?>">
+                    <label for="hargabarang">Harga Barang</label>
+                    <input type="text" name="hargabarang" class="input-control" placeholder="Harga" value="<?php echo $p->product_price ?>">
+                    <label for="jumlah">Jumlah Barang</label>
+                    <input type="text" name="jumlah" class="input-control" placeholder="Harga" value="1" required>
+                    <label for="harga">Harga Total</label>
+                    <input type="text" name="harga" class="input-control" placeholder="Harga" value="<?php echo $p->product_price ?>">
 
                     <img src="produk/<?php echo $p->product_image ?>" width="120px">
-                    <input type="hidden" name="foto" value="<?php echo $p->product_image ?>">
-                    <input type="file" name="gambar" class="input-control">
-                    <textarea class="input-control" name="deskripsi" placeholder="Deskripsi"><?php echo $p->product_description ?></textarea><br>
-
-                    <input type="submit" name="submit" value="Ubah Produk" class="btn">
+                    <br>
+                    <input type="submit" name="submit" value="Beli" class="btn">
                 </form>
                 <?php
                 if (isset($_POST['submit'])) {
 
                     //data include form
-                    $kategori   = $_POST['data-produk'];
                     $nama       = $_POST['nama'];
                     $harga      = $_POST['harga'];
-                    $deskripsi  = $_POST['deskripsi'];
                     $status     = $_POST['status'];
                     $foto       = $_POST['foto'];
 

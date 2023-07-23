@@ -72,7 +72,8 @@ footer {
   clear: both;
 }
 .section {
-  padding: 25px 0;
+  width: 100%;
+  border-collapse: collapse;
 }
 .box {
   background-color: #fff;
