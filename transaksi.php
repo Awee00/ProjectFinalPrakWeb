@@ -40,7 +40,7 @@ $p = mysqli_fetch_object($produk);
         <div class="container">
             <h3>Transaksi</h3>
             <div class="box">
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form action="" method="POST">
 
                     <label for="nama">Nama Produk</label>
                     <input type="text" name="nama" class="input-control" placeholder="Nama Produk" value="<?php echo $p->product_name ?>">
@@ -48,8 +48,8 @@ $p = mysqli_fetch_object($produk);
                     <input type="text" name="hargabarang" class="input-control" placeholder="Harga" value="<?php echo $p->product_price ?>">
                     <label for="jumlah">Jumlah Barang</label>
                     <input type="text" name="jumlah" class="input-control" placeholder="Harga" value="1" required>
-                    <label for="harga">Harga Total</label>
-                    <input type="text" name="harga" class="input-control" placeholder="Harga" value="<?php echo $p->product_price ?>">
+                    <!-- <label for="harga">Harga Total</label>
+                    <input type="text" name="harga" class="input-control" placeholder="Harga" value="<?php echo $p->product_price * $jumlah ?>"> -->
 
                     <img src="produk/<?php echo $p->product_image ?>" width="120px">
                     <br>
@@ -59,52 +59,25 @@ $p = mysqli_fetch_object($produk);
                 if (isset($_POST['submit'])) {
 
                     //data include form
-                    $nama       = $_POST['nama'];
-                    $harga      = $_POST['harga'];
-                    $status     = $_POST['status'];
-                    $foto       = $_POST['foto'];
-
-                    //menampung data gambar baru
-                    $filename = $_FILES['gambar']['name'];
-                    $tmp_name = $_FILES['gambar']['tmp_name'];
-
-                    $type1 = explode('.', $filename);
-                    $type2 = $type1[1];
-
-                    $newimage = 'produk' . time() . '.' . $type2;
-
-                    //data format file yang diizinkan
-                    $tipe_izin = array('.jpg', '.jpeg', '.png', '.gif');
-
-                    //jika admin ganti gambar
-                    if ($filename != '') {
-
-                        //membuat validasi format file
-                        if (in_array($type2, $tipe_izin)) {
-                            //jika format array tidak sesuai atau tidak ada
-                            echo '<script>alert("Format file tidak diizinkan")</script>';
-                        } else {
-                            unlink('./produk/' . $foto);
-                            move_uploaded_file($tmp_name, './produk/' . $newimage);
-                            $namagambar = $newimage;
-                        }
-                    } else {
-                        //jika admin tidak ganti gambar
-                        $namagambar = $foto;
-                    }
+                    $user = $_SESSION['id'];
+                    // $user = mysqli_query("SELECT * FROM tb_user WHERE user_id = '" . $_SESSION['id'] . "' ");
+                    $nama = $p->product_name;
+                    $produk = $p->product_id;
+                    $hargabarang = $p->product_price;
+                    $jumlah = $_POST['jumlah'];
+                    $harga = $hargabarang * $jumlah;
 
                     //query update data produk
-                    $update = mysqli_query($conn, "UPDATE tb_product SET
-                                                category_id = '" . $kategori . "', 
-                                                product_name = '" . $nama . "', 
-                                                product_price = '" . $harga . "',
-                                                product_description = '" . $deskripsi . "',
-                                                product_image = '" . $namagambar . "', 
-                                                product_status = '" . $status . "' 
-                                                WHERE product_id = '" . $p->product_id . "' ");
-                    if ($update) {
-                        echo '<script>alert("Ubah produk berhasil")</script>';
-                        echo '<script>window.location="data-produk.php"</script>';
+                    $insert = mysqli_query($conn, "INSERT INTO tb_transaction VALUES(
+                        null,
+                        '" . $user . "',
+                        '" . $produk . "',
+                        null,
+                        '" . $jumlah . "',
+                        '" . $harga . "')");
+                    if ($insert) {
+                        echo '<script>alert("Transaksi berhasil")</script>';
+                        echo '<script>window.location="index.php"</script>';
                     } else {
                         echo 'Gagal ubah produk' . mysqli_error($conn);
                     }

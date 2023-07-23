@@ -41,10 +41,8 @@ $a = mysqli_fetch_object($kontak);
     </div>
 
     <!-- new product -->
-    <!-- <div class="section"> -->
     <div class="container">
         <h3>Produk</h3>
-        <!-- <div class="box"> -->
         <div class="row">
             <?php
             if ($_GET['search'] != '' || $_GET['kat'] != '') {
@@ -55,14 +53,6 @@ $a = mysqli_fetch_object($kontak);
             if (mysqli_num_rows($produk) > 0) {
                 while ($p = mysqli_fetch_array($produk)) {
             ?>
-                    <!-- <a href="detail-produk.php?id=<?php echo $p['product_id'] ?>">
-                            <div class="col-4">
-                                <img src="produk/<?php echo $p['product_image'] ?>">
-                                <p class="nama"><?php echo substr($p['product_name'], 0, 30) ?></p>
-                                <p class="harga">Rp. <?php echo number_format($p['product_price']) ?></p>
-                            </div>
-                        </a> -->
-
                     <div class="col-md-4">
                         <div class="card mb-4 box-shadow">
                             <img class="card-img-top" src="produk/<?php echo $p['product_image'] ?>" alt="Card image cap">
@@ -82,9 +72,7 @@ $a = mysqli_fetch_object($kontak);
                 <p>Produk tidak ada</p>
             <?php } ?>
         </div>
-        <!-- </div> -->
     </div>
-    <!-- </div> -->
 
     <!-- footer -->
     <div class="footer">
